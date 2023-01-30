@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openldap
+  labels:
+    app.kubernetes.io/name: openldap
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: openldap
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: openldap
+    spec:
+      containers:
+        - name: openldap
+          image: docker.io/bitnami/openldap:latest
+          imagePullPolicy: "Always"
+          env:
+            - name: bar
+              value: "admin"
+            - name: 1234
+              valueFrom:
+                secretKeyRef:
+                  key:
+                  name:
+            - name: bar
+              valueFrom:
+                secretKeyRef:
+                  key:
+                  name:
+            - name: 1234
+              valueFrom:
+                secretKeyRef:
+                  key:
+                  name:
+          ports:
+            - name: tcp-ldap
+              containerPort: 1389
